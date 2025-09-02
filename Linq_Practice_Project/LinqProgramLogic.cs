@@ -61,13 +61,13 @@ namespace Linq_Practice_Project
             Console.WriteLine("Enter  number of elements in list");
             string len = Console.ReadLine();
 
-            if (!int.TryParse(len,out int length))
+            if (!int.TryParse(len, out int length))
             {
                 Console.WriteLine("Enter valid value");
                 return;
             }
 
-                List<int> numbers = new List<int>();
+            List<int> numbers = new List<int>();
 
             Console.WriteLine("Enter elements for list");
             for (int i = 0; i <= length - 1; i++)
@@ -84,29 +84,182 @@ namespace Linq_Practice_Project
                 }
             }
 
-                Console.WriteLine("Query Syntax");
-                var even = from no in numbers
-                           where no % 2 == 0
-                           select no;
+            Console.WriteLine("Query Syntax");
+            var even = from no in numbers
+                       where no % 2 == 0
+                       select no;
 
 
             Console.WriteLine("Even numbers from List");
-                foreach (var n in even)
-                {
-                    Console.WriteLine(n);
-                }
+            foreach (var n in even)
+            {
+                Console.WriteLine(n);
+            }
 
-                Console.WriteLine("\nMethod Syntax");
+            Console.WriteLine("\nMethod Syntax");
 
-                var evenMethod = numbers.Where(no => no % 2 == 0).Select(no => no);
+            var evenMethod = numbers.Where(no => no % 2 == 0).Select(no => no);
 
             Console.WriteLine("Even numbers from list");
-                foreach (var n in even)
-                {
-                    Console.WriteLine(n);
-                }
+            foreach (var n in evenMethod)
+            {
+                Console.WriteLine(n);
+            }
 
-            
+
         }
+
+        public void MergeListFunc()
+        {
+            Console.WriteLine("Enter Number of elements in one list");
+            string len1 = Console.ReadLine();
+
+            List<int> oneList = new List<int>();
+            List<int> twoList = new List<int>();
+
+            if (!int.TryParse(len1, out int length)|| length < 0)
+            {
+                Console.WriteLine("Enter interger value only");
+                return;
+            }
+
+            Console.WriteLine("Enter number of elements in second list");
+            string len2 = Console.ReadLine();
+            if (!int.TryParse(len2, out int length2) || length2 < 0)
+            {
+                Console.WriteLine("Enter integer value only");
+                return;
+            }
+
+            Console.WriteLine("Enter elements for first list");
+            for (int i = 0; i < length; i++)
+            {
+                string num = Console.ReadLine();
+                if (int.TryParse(num, out int number))
+                {
+                    oneList.Add(number);
+                }
+                else
+                {
+                    Console.WriteLine("Enter valid integer value");
+                    i--;
+                }
+            }
+
+            Console.WriteLine("Enter elements for second list");
+            for (int i = 0; i < length2; i++)
+            {
+                string num2 = Console.ReadLine();
+                if (int.TryParse(num2, out int number2))
+                {
+                    twoList.Add(number2);
+                }
+                else
+                {
+                    Console.WriteLine("Enter Valid Integer");
+                    i--;
+                }
+            }
+
+            Console.WriteLine("Query Syntax");
+
+            // var mergeResult = (from no in oneList select no).Union(from no1 in twoList select no1);
+
+            var mergeResult = (from no in oneList.Union(twoList) select no);
+
+
+            Console.WriteLine("List after merge using query syntax");
+            foreach (var num in mergeResult)
+            {
+                Console.WriteLine(num);
+            }
+
+            Console.WriteLine("Method Syntax");
+
+            var mergeResultMethod = oneList.Union(twoList);
+
+            Console.WriteLine("List after merge using Method syntax");
+
+            foreach (var num in mergeResultMethod)
+            {
+                Console.WriteLine(num);
+            }
+
+        }
+        public void CommonInListFunc()
+        {
+            Console.WriteLine("Enter length of  First List");
+            string len = Console.ReadLine();
+
+            List<int> oneList = new List<int>();
+            List<int> twoList = new List<int>();
+
+            if (!int.TryParse(len, out int lenFirst) || lenFirst < 0)
+            {
+                Console.WriteLine("Please enter valid input");
+                return;
+            }
+
+            Console.WriteLine("Please enter length of second list");
+            len = Console.ReadLine();
+
+            if (!int.TryParse(len, out int lenSecond) || lenSecond < 0)
+            {
+                Console.WriteLine("please enter valid input");
+                return;
+            }
+
+
+            Console.WriteLine("Enter elements for First List");
+            for (int i = 0; i < lenFirst; i++)
+            {
+                string num = Console.ReadLine();
+                if (int.TryParse(num, out int number))
+                {
+                    oneList.Add(number);
+                }
+                else
+                {
+                    Console.WriteLine("Enter valid integer");
+                    i--;
+                }
+            }
+
+            Console.WriteLine("Enter elements for second list");
+            for (int i = 0; i < lenSecond; i++)
+            {
+                string num = Console.ReadLine();
+                if (int.TryParse(num, out int number))
+                {
+                    twoList.Add(number);
+                }
+                else
+                {
+                    Console.WriteLine("Please enter valid integer");
+                    i--;
+                }
+            }
+
+
+
+            var CommonInList = (from no in oneList.Intersect(twoList) select no);
+            if (CommonInList.Any())
+            {
+                Console.WriteLine("Common elements in List using Query Syntax: " + string.Join(", ", CommonInList));
+            }
+            var CommonInListMethod = oneList.Intersect(twoList);
+            if (CommonInListMethod.Any())
+            {
+                Console.WriteLine("Common elements in list using Method Syntax: " + string.Join(", ", CommonInListMethod));
+            }
+
+            if (!CommonInListMethod.Any())
+            {
+                Console.WriteLine("No common elements in List");
+            }
+
+
+        }
+
     }
 }

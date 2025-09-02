@@ -19,6 +19,8 @@ namespace Linq_Practice_Project
                 Console.WriteLine("Enter Input from below options");
                 Console.WriteLine("1.Find max, min, average in a list using LINQ");
                 Console.WriteLine("2.Get even numbers from list using LINQ");
+                Console.WriteLine("3.Merge two lists without duplicates (Union)");
+                Console.WriteLine("4.Find common elements in two lists (Intersect)");
                 Console.WriteLine("0.Exit");
                 try
                 {
@@ -35,6 +37,16 @@ namespace Linq_Practice_Project
                         case 2:
                             logic.EvenNumberUsingLinq();
                             break;
+                        case 3:
+                            logic.MergeListFunc();
+                            break;
+                         case 4:
+                            logic.CommonInListFunc();
+                            break;
+                        default:
+                            Console.WriteLine("Please enter valid Input");
+                            break;
+
                     }
                 }
                 catch (Exception ex)
