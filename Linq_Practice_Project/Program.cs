@@ -21,6 +21,8 @@ namespace Linq_Practice_Project
                 Console.WriteLine("2.Get even numbers from list using LINQ");
                 Console.WriteLine("3.Merge two lists without duplicates (Union)");
                 Console.WriteLine("4.Find common elements in two lists (Intersect)");
+                Console.WriteLine("5.Sort integers ascending & descending (LINQ query + method syntax)");
+                Console.WriteLine("6.Sort strings by length using LINQ");
                 Console.WriteLine("0.Exit");
                 try
                 {
@@ -40,8 +42,14 @@ namespace Linq_Practice_Project
                         case 3:
                             logic.MergeListFunc();
                             break;
-                         case 4:
+                        case 4:
                             logic.CommonInListFunc();
+                            break;
+                        case 5:
+                            logic.SortUsingLinq();
+                            break;
+                        case 6:
+                            logic.SortByStringLenLinq(); 
                             break;
                         default:
                             Console.WriteLine("Please enter valid Input");

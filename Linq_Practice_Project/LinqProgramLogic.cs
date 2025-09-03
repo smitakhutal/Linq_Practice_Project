@@ -261,5 +261,87 @@ namespace Linq_Practice_Project
 
         }
 
+        public void SortUsingLinq()
+        {
+            Console.WriteLine("Enter length of  List");
+            string len = Console.ReadLine();
+
+            if (!int.TryParse(len, out int Length) || Length < 0)
+            {
+                Console.WriteLine("Enter length is invalid");
+                return;
+            }
+
+            Console.WriteLine("Enter elements for List");
+
+            List<int> numberListforSort = new List<int>();
+            for (int i = 0; i < Length; i++)
+            {
+                string num = Console.ReadLine();
+                if (int.TryParse(num, out int number))
+                {
+                    numberListforSort.Add(number);
+                }
+                else
+                {
+                    Console.WriteLine("Enter valid integer");
+                    i--;
+                }
+            }
+
+            var ResultQueryAsc = from num in numberListforSort orderby num select num;
+            Console.WriteLine("List after ascending order sorting using Query Syntax: " + string.Join(", ", ResultQueryAsc));
+
+            var ResultQueryDesc = from num in numberListforSort orderby num descending select num;
+
+            Console.WriteLine("List after descending order sorting using Query syntax: " + string.Join(", ", ResultQueryDesc));
+
+            var ResultMethodAsc = numberListforSort.OrderBy(no => no).Select(no => no);
+
+            Console.WriteLine("List after ascending order sorting using Method Syntax: " + string.Join(", ", ResultMethodAsc));
+
+            var ResultMethodDec = numberListforSort.OrderByDescending(no => no).Select(no => no);
+
+            Console.WriteLine("List after descending order sorting using method syntax: " + string.Join(", ", ResultMethodDec));
+
+        }
+
+        public void SortByStringLenLinq()
+        {
+            Console.WriteLine("Enter Length of list");
+            string len = Console.ReadLine();
+
+            if (!int.TryParse(len, out int Length) || Length < 0)
+            {
+                Console.WriteLine("Valid integer is expected");
+                return;
+            }
+
+            List<string> words = new List<string>();
+
+
+            Console.WriteLine("Enter string to list for sorting");
+            for (int i = 0; i < Length; i++)
+            {
+                
+                words.Add(Console.ReadLine());
+            }
+
+
+            var ResultQueryAse = from w in words orderby w.Length select w;
+            Console.WriteLine("string after sorting in ascending order by length using Query syntax: " + string.Join(", ", ResultQueryAse));
+
+            var ResultQueryDesc = from w in words orderby w.Length descending select w;
+
+            Console.WriteLine("string after sorting in descending order by length using Query syntax: " + string.Join(", ", ResultQueryDesc));
+
+            var ResultMethodAse = words.OrderBy(w => w.Length).Select(w => w);
+            Console.WriteLine("string after sorting in ascending order by length using Method syntax: " + string.Join(", ", ResultMethodAse));
+
+            var ResultMethoddesc = words.OrderByDescending(w => w.Length).Select(w => w);
+            Console.WriteLine("string after sorting in descending order by length using Method syntax: " + string.Join(", ", ResultMethoddesc));
+
+        }
+
     }
 }
