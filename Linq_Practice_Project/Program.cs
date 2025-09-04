@@ -23,6 +23,8 @@ namespace Linq_Practice_Project
                 Console.WriteLine("4.Find common elements in two lists (Intersect)");
                 Console.WriteLine("5.Sort integers ascending & descending (LINQ query + method syntax)");
                 Console.WriteLine("6.Sort strings by length using LINQ");
+                Console.WriteLine("7.Group students by department");
+                Console.WriteLine("8.Count frequency of elements in a list");
                 Console.WriteLine("0.Exit");
                 try
                 {
@@ -50,6 +52,12 @@ namespace Linq_Practice_Project
                             break;
                         case 6:
                             logic.SortByStringLenLinq(); 
+                            break;
+                        case 7:
+                            logic.GroupStudentByDept();
+                            break;
+                        case 8:
+                            logic.FrequencyOfElementsFunc();
                             break;
                         default:
                             Console.WriteLine("Please enter valid Input");

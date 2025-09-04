@@ -343,5 +343,113 @@ namespace Linq_Practice_Project
 
         }
 
+
+        public void GroupStudentByDept()
+        {
+            try
+            {
+                Console.WriteLine("Enter Number of students");
+                string numOfStud = Console.ReadLine();
+
+                List<Student> stud = new List<Student>();
+
+                if (!int.TryParse(numOfStud, out int noOfStud) || noOfStud < 0)
+                {
+                    Console.WriteLine("You have entered invalid number of students");
+                    return;
+                }
+
+                
+
+                Console.WriteLine("Enter student details");
+                for (int i = 0; i < noOfStud; i++)
+                {
+                    Student s = new Student();
+                    Console.WriteLine("Enter student Roll Number");
+                    s.Roll_No = Console.ReadLine();
+                    Console.WriteLine("Enter student Name");
+                    s.Name = Console.ReadLine();
+                    Console.WriteLine("Enter standard for student");
+                    s.standard = Console.ReadLine();
+                    Console.WriteLine("Enter Department");
+                    s.Department = Console.ReadLine();
+                    stud.Add(s);
+                }
+
+                
+                var ResultStudQuery = from stu in stud group stu by stu.Department;
+                Console.WriteLine("Student Details group by Departemnt using Query syntax");
+                foreach (var res in ResultStudQuery)
+                {
+                    Console.WriteLine("Department:" + res.Key);
+                    foreach (var re in res)
+                        Console.WriteLine($"Roll_no: {re.Roll_No}  Name: {re.Name}  Department:{re.Department}");
+                }
+
+                
+
+                var ResultStudMethod = stud.GroupBy(stu => stu.Department);
+                Console.WriteLine("\nStudent Details group by Department using Method Syntax");
+                foreach (var res in ResultStudMethod)
+                {
+                    Console.WriteLine("Department:" + res.Key);
+                    foreach (var re in res)
+                        Console.WriteLine($"Roll_no: {re.Roll_No}  Name: {re.Name}  Department:{re.Department}");
+                }
+
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex.ToString());
+            }
+        }
+        
+       public void FrequencyOfElementsFunc()
+        {
+            Console.WriteLine("Enter number of elements in list");
+            string len = Console.ReadLine();
+
+            List<int> Numbers = new List<int>();
+
+            if (!int.TryParse(len, out int Length) || Length < 0)
+            {
+                Console.WriteLine("Entered invalid Input");
+                return;
+            }
+
+            Console.WriteLine("Enter Elements for list");
+            for (int i = 0; i < Length; i++)
+            {
+                string num = Console.ReadLine();
+                if (int.TryParse(num, out int number))
+                {
+                    Numbers.Add(number);
+                }
+                else
+                {
+                    Console.WriteLine("Enter valid Integer");
+                    i--;
+                }
+            }
+
+            Console.WriteLine("Query Syntax");
+            var ResultQuery = from no in Numbers group no by no into g select new { element = g.Key, Count = g.Count() };
+            Console.WriteLine("\nFrequency of elements\n");
+            foreach (var res in ResultQuery)
+                Console.WriteLine($"Element:{res.element}  Frequeny: {res.Count}");
+
+
+            Console.WriteLine("\nMethod Syntax");
+
+            var ResultMethod = Numbers.GroupBy(no => no).Select(g => new { element = g.Key, Count = g.Count() });
+
+            Console.WriteLine("\nFrequency of elements\n");
+
+            foreach (var res in ResultMethod)
+                Console.WriteLine($"Element:{res.element}  Frequeny: {res.Count}");
+
+
+        }
+
     }
 }
