@@ -451,5 +451,79 @@ namespace Linq_Practice_Project
 
         }
 
+        public void NoGreaterThan50Func()
+        {
+            Console.WriteLine("Enter number of elements in List");
+            string len = Console.ReadLine();
+
+            List<int> Numbers = new List<int>();
+            if (!int.TryParse(len, out int Length) || Length < 0)
+            {
+                Console.WriteLine("You have entered invalid integer");
+                return;
+            }
+
+            Console.WriteLine("Please enter elements for list");
+            for (int i = 0; i < Length; i++)
+            {
+                string num = Console.ReadLine();
+                if (int.TryParse(num, out int number))
+                {
+                    Numbers.Add(number);
+                }
+                else
+                {
+                    Console.WriteLine("Please entered correct input");
+                    i--;
+                }
+            }
+
+            var ResultMethod = Numbers.Where(no => no > 50).Select(no=>no);
+
+            Console.WriteLine("All numbers greater than 50 using Method syntax: " + string.Join(", ", ResultMethod));
+
+            var ResultQuery = from no in Numbers where no > 50 select no;
+
+            Console.WriteLine("All numbers greater than 50 uisng Query syntax: " + string.Join(", ", ResultQuery));
+
+        }
+
+        public void FindTo3NoFunc()
+        {
+            Console.WriteLine("Enter length of list");
+            string len = Console.ReadLine();
+
+            List<int> Numbers = new List<int>();
+            if (!int.TryParse(len, out int Length) || Length < 0)
+            {
+                Console.WriteLine("You have entered wrong input");
+                return;
+            }
+
+            Console.WriteLine("Enter Elements for list");
+            for (int i = 0; i < Length; i++)
+            {
+                string num = Console.ReadLine();
+                if (int.TryParse(num, out int number))
+                {
+                    Numbers.Add(number);
+                }
+                else
+                {
+                    Console.WriteLine("Please enter valid input");
+                    i--;
+                        }
+            }
+
+            var ResultQuery = (from no in Numbers orderby no descending select no).Take(3);
+
+            Console.WriteLine("Top 3 elements from List using Query Syntax: " + string.Join(", ", ResultQuery));
+
+            var ResultMethod = Numbers.OrderByDescending(no => no).Take(3);
+
+            Console.WriteLine("Top 3 elements from List using Method Syntax: "+string.Join(", ",ResultMethod));
+
+        }
+        
     }
 }

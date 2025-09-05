@@ -25,6 +25,8 @@ namespace Linq_Practice_Project
                 Console.WriteLine("6.Sort strings by length using LINQ");
                 Console.WriteLine("7.Group students by department");
                 Console.WriteLine("8.Count frequency of elements in a list");
+                Console.WriteLine("9.Find top 3 numbers in a list using LINQ");
+                Console.WriteLine("10.Find numbers greater than 50 from a list");
                 Console.WriteLine("0.Exit");
                 try
                 {
@@ -58,6 +60,12 @@ namespace Linq_Practice_Project
                             break;
                         case 8:
                             logic.FrequencyOfElementsFunc();
+                            break;
+                        case 9:
+                            logic.FindTo3NoFunc();
+                            break;
+                        case 10:
+                            logic.NoGreaterThan50Func();
                             break;
                         default:
                             Console.WriteLine("Please enter valid Input");
